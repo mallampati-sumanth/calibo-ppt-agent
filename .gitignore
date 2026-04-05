@@ -36,8 +36,8 @@ env/
 .DS_Store
 
 # Project specific
-generated_presentations/
-*.pptx
+# generated_presentations/
+# *.pptx
 *.log
 
 # Keep example files but ignore filled files
