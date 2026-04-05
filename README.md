@@ -9,6 +9,12 @@
 
 <br>
 
+## 🎥 Video Demonstration
+Watch the Auto-PPT Agent autonomously research and generate a `.pptx` presentation in real-time, executing its tools via the MCP protocol without any manual intervention.
+**[▶️ Click here to watch the full 2-minute demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
+
+<br>
+
 **Welcome to my Auto-PPT Agent ecosystem.** 
 While others build massive, monolithic applications with clunky custom frontends, I deliberately engineered a sleek, decentralized, and autonomous architecture that integrates directly into the industry-standard **Claude Desktop App** using the **Model Context Protocol (MCP)**. 
 
