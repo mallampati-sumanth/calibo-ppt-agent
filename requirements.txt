@@ -1,0 +1,41 @@
+# ============================================================================
+# REQUIREMENTS.TXT - All Python Dependencies
+# ============================================================================
+# LLM PROVIDER OPTIONS - Choose ONE:
+# ============================================================================
+# GROQ (Free - Fastest, Recommended!)
+langchain-groq>=0.1.0
+
+# GOOGLE GEMINI (Free trial - 60 requests/minute)
+# langchain-google-genai>=0.0.1
+
+# ANTHROPIC Claude (Paid - Most capable)
+# langchain-anthropic>=0.1.0
+
+# ============================================================================
+# CORE DEPENDENCIES
+# ============================================================================
+
+# MCP Framework
+modelcontextprotocol>=1.0.0
+mcp>=1.0.0
+
+# LangChain Ecosystem
+langchain>=0.2.0
+langchain-core>=0.2.0
+
+# PowerPoint Generation
+python-pptx>=0.6.21
+
+# Environment Management
+python-dotenv>=1.0.0
+
+# ============================================================================
+# OPTIONAL BUT RECOMMENDED
+# ============================================================================
+colorama>=0.4.6
+
+# ============================================================================
+# INSTALLATION:
+# pip install -r requirements.txt
+# ============================================================================

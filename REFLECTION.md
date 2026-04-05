@@ -1,0 +1,7 @@
+# Reflection: Auto-PPT Agent
+
+## 1. Where did your agent fail its first attempt?
+In my early testing, the agent failed because it hallucinated specific data points when challenged with niche topics (e.g., trying to write bullet points about complex physics without proper research). When forced to generate content solely from its base weights, it produced generic, repetitive bullet points. Additionally, before explicitly instructing it to plan the presentation upfront, it would blindly invoke `add_slide` sequentially and often hit the tool limit before finishing a logical conclusion.
+
+## 2. How did MCP prevent you from writing hardcoded scripts?
+Through the Model Context Protocol (MCP), I completely decoupled the "Brain" (`ppt_agent.py`) from the "Hands" (`ppt_server.py` and `search_server.py`). Without MCP, I would have had to hardcode Python `python-pptx` API calls directly inside the agent loop, rigidly formatting how slides are added. Instead, by exposing standard tools with clear schemas (like `add_slide_with_title_and_bullets` and `search_topic`), the LLM could dynamically decide *when* and *how* to use the filesystem to build the presentation and gather real-time factual data from Wikipedia. It transformed what would have been a rigid script into a flexible, autonomous decision-making engine.

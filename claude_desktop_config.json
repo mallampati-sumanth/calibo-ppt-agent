@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "ppt_maker": {
+      "command": "python",
+      "args": [
+        "D:\\college\\calibo\\ppt_agent\\ppt_server.py"
+      ]
+    },
+    "web_search": {
+      "command": "python",
+      "args": [
+        "D:\\college\\calibo\\ppt_agent\\search_server.py"
+      ]
+    }
+  }
+}
