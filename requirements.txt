@@ -20,6 +20,9 @@ langchain-groq>=0.1.0
 modelcontextprotocol>=1.0.0
 mcp>=1.0.0
 
+# Async runtime used by robust stdio transport
+anyio>=4.0.0
+
 # LangChain Ecosystem
 langchain>=0.2.0
 langchain-core>=0.2.0
@@ -29,6 +32,17 @@ python-pptx>=0.6.21
 
 # Environment Management
 python-dotenv>=1.0.0
+
+# Web stack (DoPPT)
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+
+# Groq OpenAI-compatible client
+openai>=1.0.0
+
+# Live search tool used by mcp_servers/search_server.py
+duckduckgo_search>=6.0.0
 
 # ============================================================================
 # OPTIONAL BUT RECOMMENDED

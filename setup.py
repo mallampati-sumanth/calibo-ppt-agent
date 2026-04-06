@@ -197,7 +197,7 @@ def setup_environment_file():
 
     if env_file.exists():
         print_warning(".env file already exists")
-        print_info("Make sure ANTHROPIC_API_KEY is set in .env")
+        print_info("Make sure GROQ_API_KEY is set in .env")
         return True
 
     if env_example.exists():
@@ -210,11 +210,11 @@ def setup_environment_file():
     else:
         print_action("Creating .env file...")
         with open(env_file, "w") as f:
-            f.write("ANTHROPIC_API_KEY=your-key-here\n")
+            f.write("GROQ_API_KEY=your-key-here\n")
         print_success(".env file created")
 
-    print_warning("⚠ IMPORTANT: Edit .env and add your Anthropic API key")
-    print_info("Get your key from: https://console.anthropic.com/")
+    print_warning("⚠ IMPORTANT: Edit .env and add your Groq API key")
+    print_info("Get your key from: https://console.groq.com/")
     print_info("Do NOT commit .env to GitHub!")
     return True
 
@@ -233,8 +233,12 @@ def verify_installation():
     packages_to_test = {
         "pptx": "python-pptx (PowerPoint generation)",
         "mcp": "mcp (Model Context Protocol)",
-        "langchain": "langchain (Agent framework)",
-        "anthropic": "anthropic (the UI API)",
+        "anyio": "anyio (async runtime for robust stdio)",
+        "openai": "openai (Groq OpenAI-compatible client)",
+        "duckduckgo_search": "duckduckgo_search (live web search)",
+        "fastapi": "fastapi (DoPPT backend)",
+        "uvicorn": "uvicorn (ASGI server)",
+        "langchain": "langchain (optional agent framework)",
     }
 
     all_ok = True
@@ -284,17 +288,21 @@ def print_final_status(all_passed):
         print("""
 NEXT STEPS:
 
-1. Edit .env and add your ANTHROPIC_API_KEY:
-   - Get key from: https://console.anthropic.com/
-   - Open .env and paste it
+1. Edit .env and add your GROQ_API_KEY:
+    - Get key from: https://console.groq.com/
+    - Open .env and paste it
 
 2. (Optional) Test the MCP Server with the Inspector:
-   npx @modelcontextprotocol/inspector python ppt_server.py
+    npx @modelcontextprotocol/inspector python mcp_servers/ppt_server.py
 
-3. Run the Agent:
-   python ppt_agent.py
+3. Run the DoPPT Web App:
+    python backend/main.py
+    - Then open frontend/index.html in your browser
 
-4. Watch your presentation generate! 🎉
+4. (Optional) Run the standalone terminal demo:
+    python ppt_agent.py
+
+5. Watch your presentation generate! 🎉
 
 DOCUMENTATION:
 - Read README.md for full architecture explanation

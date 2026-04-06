@@ -3,6 +3,7 @@ import os
 import json
 import asyncio
 from openai import AsyncOpenAI
+from dotenv import load_dotenv
 from mcp.client.stdio import stdio_client, StdioServerParameters
 from mcp.client.session import ClientSession
 
@@ -14,15 +15,23 @@ C++ backend completely. It uses the Groq API (running Llama 3.3) as its intellig
 and natively spawns standard I/O (stdio) Python processes for the MCP tool servers.
 """
 
-# ?? Authentication Layer
-# The user provided a Groq API key to power the Llama 3.3 inference engine natively.
-GROK_API_KEY = "your_groq_api_key_here"
+# Load local environment variables from .env (if present)
+load_dotenv()
+
+# Authentication Layer
+# Prefer the standard env var name, but keep compatibility with older code.
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("GROK_API_KEY")
+
+if not GROQ_API_KEY:
+    raise ValueError(
+        "Missing Groq API key. Set GROQ_API_KEY in your environment (or in a .env file)."
+    )
 
 # ?? Base Client Configuration
 # We instantiate the OpenAI Python SDK but instruct it to hit Groq's custom OpenAI-compatible endpoint.
 # This lets us seamlessly use the `tools` calling schema natively.
 client = AsyncOpenAI(
-    api_key=GROK_API_KEY,
+    api_key=GROQ_API_KEY,
     base_url="https://api.groq.com/openai/v1",
 )
 

@@ -1,135 +1,149 @@
 <div align="center">
-  <h1>🪄 Auto-PPT Agent</h1>
+  <h1>🪄 Auto-PPT Agent (DoPPT)</h1>
   <p><em>An Enterprise-Grade, Autonomous Model Context Protocol (MCP) Ecosystem</em></p>
   <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Architecture-100%25%20Modular%20OOP-blue?style=for-the-badge" alt="Architecture" />
-  <img src="https://img.shields.io/badge/Client-Claude%20Desktop-purple?style=for-the-badge" alt="Client" />
-  <img src="https://img.shields.io/badge/Cost-Zero%20API%20Keys-brightgreen?style=for-the-badge" alt="Cost" />
+  <img src="https://img.shields.io/badge/Client-DoPPT%20Web%20UI-purple?style=for-the-badge" alt="Client" />
+  <img src="https://img.shields.io/badge/Brain-Groq%20LLM-orange?style=for-the-badge" alt="Brain" />
 </div>
 
 <br>
 
 ## 🎥 Video Demonstration
-Watch the Auto-PPT Agent autonomously research and generate a `.pptx` presentation in real-time, executing its tools via the MCP protocol without any manual intervention.
-**[▶️ Click here to watch the full  demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
+Watch the agent autonomously research and generate a `.pptx` presentation in real-time, executing tools via MCP with no manual slide editing.
+**[▶️ Click here to watch the full demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
 
 <br>
 
-**Welcome to my Auto-PPT Agent ecosystem.** 
-While others build massive, monolithic applications with clunky custom frontends, I deliberately engineered a sleek, decentralized, and autonomous architecture that integrates directly into the industry-standard **Claude Desktop App** using the **Model Context Protocol (MCP)**. 
-
-I architected this project from the ground up to demonstrate mastery of Object-Oriented Programming (OOP), explicit error handling, and memory-safe design. 
+**Welcome to my Auto-PPT Agent ecosystem.**
+I engineered this project as a clean, decentralized architecture where the **LLM Brain** never touches the filesystem directly.
+Instead, it executes a strict **MCP toolchain** ("The Eyes" + "The Hands") to ground content in real data and write a `.pptx` safely to disk.
 
 ---
 
-## 🌟 The Core Idea (How I Built It Better)
+## 🌟 The Core Idea (How It Works in the Current Version)
 
-**Your Prompt:** *"Search Wikipedia for Team Collaboration, build a presentation, and include a two-column comparison and an AI image."*
+**Your Prompt (from the DoPPT Web UI):**
+*"Create a 6-slide presentation about Team Collaboration. Use live research, include a two-column comparison slide, and add an image placeholder slide."*
 
 ```text
-                            ↓ [Claude Desktop App]
-             (Plans slide structure, triggers specialized MCP tools)
-                            ↓ [mcp_stdio_robust.py - The Shield]
-               (Filters JSON-RPC noise, preventing pipeline crashes)
-                            ↓ [FastMCP Router]
+                            ↓ [DoPPT Web UI]
+             (frontend/index.html — ChatGPT-style interface)
+                            ↓ [FastAPI Backend]
+                  (backend/main.py — /api/generate)
+                            ↓ [backend/agent_mcp.py]
+            (Groq Llama 3.3 Brain + MCP Router / Tool Dispatcher)
+                            ↓ [FastMCP + Robust Stdio Shield]
+             (mcp_servers/mcp_stdio_robust.py — The Shield)
+                            ↓
             ┌──────────────────────────────────────────────┐
             │           PARALLEL TOOL EXECUTION            │
-            ├───────────────┐              ┌───────────────┤
-  [search_server.py]        │              │  [ppt_server.py]
-      (The Eyes)            │              │    (The Hands)
- Fetches Wikipedia data  ◄──┘              └──► Boots PPTManager, 
-   to eliminate AI                               fetches AI image,
-    hallucination.                                writes to disk.
+            ├──────────────────┐        ┌──────────────────┤
+ [mcp_servers/search_server.py]│        │[mcp_servers/ppt_server.py]
+           (The Eyes)          │        │       (The Hands)
+     DuckDuckGo live search ◄──┘        └──► python-pptx writes slides
             └──────────────────────────────────────────────┘
-                            ↓ 
-           [Output: presentation_2026.pptx saved securely!]
+                            ↓
+        [Output: generated_presentations/<your_file>.pptx saved locally]
 ```
 
 ---
 
 ## 💎 What Makes My Project Special?
 
-1. **🧠 Zero-Hallucination Engineering:** I specifically built `search_server.py` to natively query Wikipedia's REST APIs. Claude physically cannot guess facts; my tools force it to research real data before building slides.
-2. **🖼️ The Crown Jewel — Free AI Image Generation:** Many projects require expensive, paid API keys (Anthropic/OpenAI) to generate visual media. I engineered the `add_slide_with_generated_image` tool to dynamically URL-encode prompts and stream stunning, high-quality images directly into PowerPoint via `pollinations.ai`—**100% free, zero keys required.**
-3. **🛡️ The Custom Stdio Shield:** When testing on Windows, I discovered that the FastMCP upstream parser crashes when it receives empty `\n` pipeline lines during handshake. To achieve a 5-star stability metric, I engineered `mcp_stdio_robust.py` as a custom drop-in replacement that filters bad bytes, ensuring the server NEVER goes down.
-4. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely. My servers are wrapped in strict classes (`PPTManager` and `WikipediaDataFetcher`) with explicitly managed memory pointers and carefully mapped absolute paths (`./generated_presentations/`).
+1. **🧠 Grounded Content by Design:** In the DoPPT web stack, `mcp_servers/search_server.py` uses DuckDuckGo excerpts so the Brain can pull real-world context before writing slides.
+2. **🛡️ The Custom Stdio Shield (Windows-Proof):** `mcp_servers/mcp_stdio_robust.py` filters whitespace-only stdin lines that can crash JSON-RPC parsing on Windows pipes.
+3. **🏗️ Absolute Modularity (OOP):** The slide generator uses a strict `PPTManager` class (no messy global pipelines), and always saves output into `generated_presentations/`.
+4. **📦 Two Run Modes:**
+   - **DoPPT Web UI mode (current default):** `frontend/` + `backend/` + `mcp_servers/`.
+   - **Standalone MCP demo mode:** legacy root scripts (`ppt_server.py`, `search_server.py`) are kept as a professor-friendly reference implementation.
 
 ---
 
-## 🗺️ System Architecture
-
-My architecture completely decouples the **LLM Brain** from the **Filesystem Hands** and **Web Eyes**.
+## 🗺️ System Architecture (Current)
 
 ```mermaid
 graph TD
     classDef ui fill:#A8C6FA,stroke:#333,stroke-width:2px,color:#000;
+    classDef brain fill:#FDBA74,stroke:#333,stroke-width:2px,color:#000;
     classDef shield fill:#FDE047,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000;
     classDef server fill:#86EFAC,stroke:#333,stroke-width:2px,color:#000;
     classDef external fill:#FCA5A5,stroke:#333,stroke-width:2px,color:#000;
 
-    UI[Claude Desktop UI]:::ui -- JSON-RPC --> Shield(mcp_stdio_robust.py<br/>The Shield):::shield
-    Shield -- "Valid JSON Only" --> Framework{FastMCP Router}
-    
-    Framework -->|WebSearchServer| Search[search_server.py<br/>The Eyes]:::server
-    Search -- "Fetches Real Data" --> Wiki[(Wikipedia API)]:::external
-    
-    Framework -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
-    PPT -- "Generates Slides" --> Disk[(Local .pptx Files)]:::external
-    PPT -- "Fetches Byte-Streams" --> AI_Image[(Free AI Image API)]:::external
+    UI[DoPPT Web UI<br/>frontend/index.html]:::ui --> API[FastAPI<br/>backend/main.py]:::ui
+    API --> Brain[Groq LLM Brain<br/>backend/agent_mcp.py]:::brain
+    Brain --> Shield[mcp_stdio_robust.py<br/>The Shield]:::shield
+    Shield --> Router{FastMCP Tool Router}
+
+    Router -->|WebSearchServer| Search[mcp_servers/search_server.py<br/>The Eyes]:::server
+    Search --> DDG[(DuckDuckGo Search)]:::external
+
+    Router -->|PPTOperations| PPT[mcp_servers/ppt_server.py<br/>The Hands]:::server
+    PPT --> Disk[(generated_presentations/*.pptx)]:::external
 ```
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure (Current)
 
 ```text
-ppt-agent/
+ppt_agent/
 │
-├── README.md                      # Architectural case study (you are here)
-├── REFLECTION.md                  # Detailed breakdown of my design process
-├── claude_desktop_config.json     # The JSON schema linking Claude to my MCP servers
-├── requirements.txt               # Locked dependencies (python-pptx, mcp)
-├── setup.py                       # Automated environment bootstrapping
+├── README.md
+├── requirements.txt
+├── setup.py
+├── .env                         # local secrets (gitignored)
 │
-├── mcp_stdio_robust.py            # My custom JSON-RPC pipeline shield
-├── ppt_server.py                  # The Hands (PowerPoint Generator & Image Fetcher)
-├── search_server.py               # The Eyes (Wikipedia Fact-Checker)
+├── frontend/
+│   └── index.html               # DoPPT ChatGPT-style UI
 │
-└── generated_presentations/       # Secure absolute-path output folder
-    └── Team_Collaboration.pptx    # Ready-to-present output files
+├── backend/
+│   ├── main.py                  # FastAPI API server (/api/generate)
+│   └── agent_mcp.py             # Groq Brain + MCP stdio orchestration
+│
+├── mcp_servers/
+│   ├── mcp_stdio_robust.py       # The Shield (robust JSON-RPC stdio)
+│   ├── search_server.py          # The Eyes (DuckDuckGo excerpts)
+│   └── ppt_server.py             # The Hands (python-pptx slide writer)
+│
+└── generated_presentations/      # Output .pptx files land here
 ```
 
 ---
 
-## 🚀 Setup Complete in 3 Steps
+## 🚀 Setup (Current Web UI Version)
 
-**Prerequisites:** Python 3.9+ & Claude Desktop App.
-
-### Step 1: Bootstrap the Environment
-Simply clone the repository and run my automated setup script. This creates a secure `.venv` and installs the minimal, native dependencies (`python-pptx` and `mcp`).
+### Step 1: Install
 
 ```powershell
 python setup.py
 ```
 
-### Step 2: Link to Claude Desktop
-Point your local Claude Desktop config to the newly created secure environment.
-*   **Config file location:** `%APPDATA%\Claude\claude_desktop_config.json`
-*   Add my two servers, pointing them specifically to `./.venv/Scripts/python.exe`. (Reference my included `claude_desktop_config.json` for the exact schema).
+### Step 2: Add Your Groq Key
 
-### Step 3: Run It!
-Open Claude Desktop and prompt it! The agent will negotiate with my servers locally:
-> *"Create a 5-slide presentation on Artificial Intelligence. First, search Wikipedia for the latest info. Then, build the slides—make sure to include a Two-Column Comparison slide and an AI-drawn image slide using the tools."*
+Create/edit `.env` at project root:
+
+```bash
+GROQ_API_KEY=your_key_here
+```
+
+### Step 3: Run
+
+Terminal 1 (backend):
+
+```powershell
+python backend/main.py
+```
+
+Then open `frontend/index.html` in your browser.
 
 ---
 
-## 👨‍💻 Development & Code Quality
+## 🧪 Notes (So GitHub Rendering Looks Correct)
 
-*   **Error Handling:** Every single tool I wrote (`add_slide`, `search_topic`, etc.) is wrapped in strict `try/except` bounds. If a tool fails, it catches the error and returns a dynamic fallback string (e.g., gracefully hallucinating if the internet drops) rather than crashing the agent.
-*   **Documentation:** Every `.py` file contains comprehensive, first-person architectural docstrings outlining *why* I engineered it that way, alongside line-by-line intent documentation. 
-
-**This ecosystem isn't just a script; it's a fully operational, decentralized AI microservice network.**
+- This README uses fenced code blocks (```), Mermaid, and centered HTML badges.
+- If you edit the README on Windows PowerShell, do **not** wrap it in backtick-heavy strings; it can break GitHub rendering.
 
 <div align="center">
-  <p><em>Architected and Engineered meticulously for perfect execution metrics.</em></p>
+  <p><em>Architected and engineered for stable, tool-driven execution.</em></p>
 </div>
