@@ -1,134 +1,147 @@
-<div align="center">
-  <h1>🪄 Auto-PPT Agent</h1>
+﻿<div align="center">
+  <h1>✨ DoPPT (Full-Stack Auto-PPT Creator)</h1>
   <p><em>An Enterprise-Grade, Autonomous Model Context Protocol (MCP) Ecosystem</em></p>
   <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/Architecture-100%25%20Modular%20OOP-blue?style=for-the-badge" alt="Architecture" />
-  <img src="https://img.shields.io/badge/Client-Claude%20Desktop-purple?style=for-the-badge" alt="Client" />
-  <img src="https://img.shields.io/badge/Cost-Zero%20API%20Keys-brightgreen?style=for-the-badge" alt="Cost" />
+  <img src="https://img.shields.io/badge/Architecture-Full--Stack%20%2F%20OOP-blue?style=for-the-badge" alt="Architecture" />
+  <img src="https://img.shields.io/badge/AI%20Engine-Groq%20Llama%203.3-purple?style=for-the-badge" alt="Engine" />
+  <img src="https://img.shields.io/badge/Search-DuckDuckGo-brightgreen?style=for-the-badge" alt="Search" />
 </div>
 
 <br>
 
 ## 🎥 Video Demonstration
-Watch the Auto-PPT Agent autonomously research and generate a `.pptx` presentation in real-time, executing its tools via the MCP protocol without any manual intervention.
-**[▶️ Click here to watch the full  demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
+Watch DoPPT autonomously research and generate a .pptx presentation in real-time, executing its tools natively without relying on 3rd-party desktop clients!
+**[▶️ Click here to watch the full demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
 
 <br>
 
-**Welcome to my Auto-PPT Agent ecosystem.** 
-While others build massive, monolithic applications with clunky custom frontends, I deliberately engineered a sleek, decentralized, and autonomous architecture that integrates directly into the industry-standard **Claude Desktop App** using the **Model Context Protocol (MCP)**. 
+**Welcome to the DoPPT ecosystem.** 
+While standard MCP implementations rely heavily on the Anthropic/Claude Desktop App, I deliberately engineered a completely custom, full-stack architecture that implements the **Model Context Protocol (MCP)** natively. 
 
-I architected this project from the ground up to demonstrate mastery of Object-Oriented Programming (OOP), explicit error handling, and memory-safe design. 
+I architected this project from the ground up to demonstrate mastery of asynchronous Python APIs, custom UI development, and programmatic LLM tool orchestration.
 
 ---
 
 ## 🌟 The Core Idea (How I Built It Better)
 
-**Your Prompt:** *"Search Wikipedia for Team Collaboration, build a presentation, and include a two-column comparison and an AI image."*
+**Your Prompt:** *"Create a 5-slide presentation on Artificial Intelligence trends."*
 
-```text
-                            ↓ [Claude Desktop App]
-             (Plans slide structure, triggers specialized MCP tools)
-                            ↓ [mcp_stdio_robust.py - The Shield]
-               (Filters JSON-RPC noise, preventing pipeline crashes)
-                            ↓ [FastMCP Router]
+`	ext
+                            ↓ [DoPPT Web UI (index.html)]
+              (Captures user intent with a sleek ChatGPT-style interface)
+                            ↓ [FastAPI Backend (main.py)]
+                (Routes the HTTP request securely to the Python Agent)
+                            ↓ [Native Orchestrator (agent_mcp.py)]
             ┌──────────────────────────────────────────────┐
             │           PARALLEL TOOL EXECUTION            │
             ├───────────────┐              ┌───────────────┤
   [search_server.py]        │              │  [ppt_server.py]
       (The Eyes)            │              │    (The Hands)
- Fetches Wikipedia data  ◄──┘              └──► Boots PPTManager, 
-   to eliminate AI                               fetches AI image,
+ Fetches DuckDuckGo data ◄──┘              └──► Boots PPTManager, 
+   to eliminate AI                               formats slides,
     hallucination.                                writes to disk.
             └──────────────────────────────────────────────┘
                             ↓ 
-           [Output: presentation_2026.pptx saved securely!]
-```
+           [Output: generated_presentations/my_slides.pptx saved securely!]
+`
 
 ---
 
 ## 💎 What Makes My Project Special?
 
-1. **🧠 Zero-Hallucination Engineering:** I specifically built `search_server.py` to natively query Wikipedia's REST APIs. Claude physically cannot guess facts; my tools force it to research real data before building slides.
-2. **🖼️ The Crown Jewel — Free AI Image Generation:** Many projects require expensive, paid API keys (Anthropic/OpenAI) to generate visual media. I engineered the `add_slide_with_generated_image` tool to dynamically URL-encode prompts and stream stunning, high-quality images directly into PowerPoint via `pollinations.ai`—**100% free, zero keys required.**
-3. **🛡️ The Custom Stdio Shield:** When testing on Windows, I discovered that the FastMCP upstream parser crashes when it receives empty `\n` pipeline lines during handshake. To achieve a 5-star stability metric, I engineered `mcp_stdio_robust.py` as a custom drop-in replacement that filters bad bytes, ensuring the server NEVER goes down.
-4. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely. My servers are wrapped in strict classes (`PPTManager` and `WikipediaDataFetcher`) with explicitly managed memory pointers and carefully mapped absolute paths (`./generated_presentations/`).
+1. **🧠 Independent LLM Brain:** I bypassed Claude entirely, routing the intelligence through **Groq's Llama 3.3-70b**. It's incredibly fast and fully capable of parsing JSON-RPC tool schemas natively.
+2. **🌐 Live Web Search Integration:** Replaced basic REST APIs with the duckduckgo-search library, giving the agent real-time access to the live internet to ensure strict factual accuracy.
+3. **💻 Custom Premium Frontend:** Built a beautiful, responsive HTML/JS UI acting as the primary prompt engine, modeled in a clean **ChatGPT-style format**.
+4. **⚙️ Native MCP Orchestration:** Used mcp.client.stdio natively. The Python backend programmatically establishes standard I/O byte streams matching directly with the local Python tool servers, removing the need for external desktop apps.
+5. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely inside the tool servers. My servers are wrapped in strict classes (PPTManager and WebSearchFetcher) with explicitly managed memory states and absolute file pathing.
 
 ---
 
 ## 🗺️ System Architecture
 
-My architecture completely decouples the **LLM Brain** from the **Filesystem Hands** and **Web Eyes**.
+My architecture completely decouples the **Frontend UI**, the **LLM Brain**, and the **Filesystem Hands**.
 
-```mermaid
+`mermaid
 graph TD
     classDef ui fill:#A8C6FA,stroke:#333,stroke-width:2px,color:#000;
-    classDef shield fill:#FDE047,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000;
+    classDef api fill:#FDE047,stroke:#333,stroke-width:2px,color:#000;
     classDef server fill:#86EFAC,stroke:#333,stroke-width:2px,color:#000;
     classDef external fill:#FCA5A5,stroke:#333,stroke-width:2px,color:#000;
 
-    UI[Claude Desktop UI]:::ui -- JSON-RPC --> Shield(mcp_stdio_robust.py<br/>The Shield):::shield
-    Shield -- "Valid JSON Only" --> Framework{FastMCP Router}
+    UI[UI: index.html]:::ui -- POST /api/generate --> Backend(FastAPI: main.py):::api
+    Backend -- Initiates workflow --> Orchestrator{agent_mcp.py<br/>MCP Loop}
     
-    Framework -->|WebSearchServer| Search[search_server.py<br/>The Eyes]:::server
-    Search -- "Fetches Real Data" --> Wiki[(Wikipedia API)]:::external
+    Orchestrator -- Prompt + Tools --> Groq[(Groq Llama 3.3 API)]:::external
     
-    Framework -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
-    PPT -- "Generates Slides" --> Disk[(Local .pptx Files)]:::external
-    PPT -- "Fetches Byte-Streams" --> AI_Image[(Free AI Image API)]:::external
-```
+    Orchestrator -->|WebSearchServer| Search[search_server.py<br/>The Eyes]:::server
+    Search -- Fetches Real Data --> DDG[(DuckDuckGo)]:::external
+    
+    Orchestrator -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
+    PPT -- Generates Slides --> Disk[(Local .pptx Files)]:::external
+`
 
 ---
 
 ## 📁 Project Structure
 
-```text
-ppt-agent/
+`	ext
+ppt_agent/
 │
 ├── README.md                      # Architectural case study (you are here)
-├── REFLECTION.md                  # Detailed breakdown of my design process
-├── claude_desktop_config.json     # The JSON schema linking Claude to my MCP servers
-├── requirements.txt               # Locked dependencies (python-pptx, mcp)
-├── setup.py                       # Automated environment bootstrapping
+├── requirements.txt               # Locked dependencies and libraries
 │
-├── mcp_stdio_robust.py            # My custom JSON-RPC pipeline shield
-├── ppt_server.py                  # The Hands (PowerPoint Generator & Image Fetcher)
-├── search_server.py               # The Eyes (Wikipedia Fact-Checker)
+├── frontend/
+│   └── index.html                 # The beautiful ChatGPT-style UI
+├── backend/
+│   ├── main.py                    # The FastAPI web server
+│   └── agent_mcp.py               # The core MCP orchestrator hooking to Groq
+│
+├── mcp_servers/
+│   ├── ppt_server.py              # The Hands (PowerPoint Generator)
+│   └── search_server.py           # The Eyes (DuckDuckGo Fact-Checker)
 │
 └── generated_presentations/       # Secure absolute-path output folder
-    └── Team_Collaboration.pptx    # Ready-to-present output files
-```
+`
 
 ---
 
 ## 🚀 Setup Complete in 3 Steps
 
-**Prerequisites:** Python 3.9+ & Claude Desktop App.
+**Prerequisites:** Python 3.10+
 
-### Step 1: Bootstrap the Environment
-Simply clone the repository and run my automated setup script. This creates a secure `.venv` and installs the minimal, native dependencies (`python-pptx` and `mcp`).
+### Step 1: Install Dependencies
+Open your terminal and install the required native dependencies:
 
-```powershell
-python setup.py
-```
+`ash
+pip install fastapi uvicorn pydantic mcp duckduckgo-search python-pptx openai
+`
 
-### Step 2: Link to Claude Desktop
-Point your local Claude Desktop config to the newly created secure environment.
-*   **Config file location:** `%APPDATA%\Claude\claude_desktop_config.json`
-*   Add my two servers, pointing them specifically to `./.venv/Scripts/python.exe`. (Reference my included `claude_desktop_config.json` for the exact schema).
+### Step 2: Start the Backend Server
+Navigate to the ackend directory and start the FastAPI Uvicorn server.
+*(Ensure your Groq API key is set inside ackend/agent_mcp.py!)*
 
-### Step 3: Run It!
-Open Claude Desktop and prompt it! The agent will negotiate with my servers locally:
-> *"Create a 5-slide presentation on Artificial Intelligence. First, search Wikipedia for the latest info. Then, build the slides—make sure to include a Two-Column Comparison slide and an AI-drawn image slide using the tools."*
+`ash
+cd backend
+python -m uvicorn main:app
+`
+*(Ensure it runs on port 8000)*
+
+### Step 3: Launch the UI & Generate
+Simply open rontend/index.html in your favorite web browser. 
+
+Type your request in the beautifully styled chat box:
+> *"Create a 5-slide presentation on Artificial Intelligence trends."*
+
+Sit back and watch DoPPT orchestrate the research, slide generation, and formatting completely autonomously!
 
 ---
 
 ## 👨‍💻 Development & Code Quality
 
-*   **Error Handling:** Every single tool I wrote (`add_slide`, `search_topic`, etc.) is wrapped in strict `try/except` bounds. If a tool fails, it catches the error and returns a dynamic fallback string (e.g., gracefully hallucinating if the internet drops) rather than crashing the agent.
-*   **Documentation:** Every `.py` file contains comprehensive, first-person architectural docstrings outlining *why* I engineered it that way, alongside line-by-line intent documentation. 
+*   **Error Handling:** Every single tool is wrapped in strict 	ry/except bounds. If a network request fails or formatting drops, it catches the error and returns a dynamic fallback string to the LLM (e.g., instructing it to use internal knowledge) rather than crashing the agent.
+*   **Documentation:** Every .py file contains comprehensive, professional architectural docstrings outlining *why* it was engineered that way, alongside line-by-line intent inline comments.
 
-**This ecosystem isn't just a script; it's a fully operational, decentralized AI microservice network.**
+**This ecosystem isn't just a script; it's a fully operational, decentralized full-stack AI platform.**
 
 <div align="center">
   <p><em>Architected and Engineered meticulously for perfect execution metrics.</em></p>
