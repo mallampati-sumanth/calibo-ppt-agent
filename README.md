@@ -10,7 +10,7 @@
 <br>
 
 ## 🎥 Video Demonstration
-Watch the Auto-PPT Agent autonomously research and generate a .pptx presentation in real-time, executing its tools via the MCP protocol without any manual intervention.
+Watch the Auto-PPT Agent autonomously research and generate a `.pptx` presentation in real-time, executing its tools via the MCP protocol without any manual intervention.
 **[▶️ Click here to watch the full  demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
 
 <br>
@@ -26,7 +26,7 @@ I architected this project from the ground up to demonstrate mastery of Object-O
 
 **Your Prompt:** *"Search Wikipedia for Team Collaboration, build a presentation, and include a two-column comparison and an AI image."*
 
-`	ext
+```text
                             ↓ [Claude Desktop App]
              (Plans slide structure, triggers specialized MCP tools)
                             ↓ [mcp_stdio_robust.py - The Shield]
@@ -43,16 +43,16 @@ I architected this project from the ground up to demonstrate mastery of Object-O
             └──────────────────────────────────────────────┘
                             ↓ 
            [Output: presentation_2026.pptx saved securely!]
-`
+```
 
 ---
 
 ## 💎 What Makes My Project Special?
 
-1. **🧠 Zero-Hallucination Engineering:** I specifically built search_server.py to natively query Wikipedia's REST APIs. Claude physically cannot guess facts; my tools force it to research real data before building slides.
-2. **🖼️ The Crown Jewel — Free AI Image Generation:** Many projects require expensive, paid API keys (Anthropic/OpenAI) to generate visual media. I engineered the dd_slide_with_generated_image tool to dynamically URL-encode prompts and stream stunning, high-quality images directly into PowerPoint via pollinations.ai—**100% free, zero keys required.**
-3. **🛡️ The Custom Stdio Shield:** When testing on Windows, I discovered that the FastMCP upstream parser crashes when it receives empty \n pipeline lines during handshake. To achieve a 5-star stability metric, I engineered mcp_stdio_robust.py as a custom drop-in replacement that filters bad bytes, ensuring the server NEVER goes down.
-4. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely. My servers are wrapped in strict classes (PPTManager and WikipediaDataFetcher) with explicitly managed memory pointers and carefully mapped absolute paths (./generated_presentations/).
+1. **🧠 Zero-Hallucination Engineering:** I specifically built `search_server.py` to natively query Wikipedia's REST APIs. Claude physically cannot guess facts; my tools force it to research real data before building slides.
+2. **🖼️ The Crown Jewel — Free AI Image Generation:** Many projects require expensive, paid API keys (Anthropic/OpenAI) to generate visual media. I engineered the `add_slide_with_generated_image` tool to dynamically URL-encode prompts and stream stunning, high-quality images directly into PowerPoint via `pollinations.ai`—**100% free, zero keys required.**
+3. **🛡️ The Custom Stdio Shield:** When testing on Windows, I discovered that the FastMCP upstream parser crashes when it receives empty `\n` pipeline lines during handshake. To achieve a 5-star stability metric, I engineered `mcp_stdio_robust.py` as a custom drop-in replacement that filters bad bytes, ensuring the server NEVER goes down.
+4. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely. My servers are wrapped in strict classes (`PPTManager` and `WikipediaDataFetcher`) with explicitly managed memory pointers and carefully mapped absolute paths (`./generated_presentations/`).
 
 ---
 
@@ -60,7 +60,7 @@ I architected this project from the ground up to demonstrate mastery of Object-O
 
 My architecture completely decouples the **LLM Brain** from the **Filesystem Hands** and **Web Eyes**.
 
-`mermaid
+```mermaid
 graph TD
     classDef ui fill:#A8C6FA,stroke:#333,stroke-width:2px,color:#000;
     classDef shield fill:#FDE047,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000;
@@ -76,13 +76,13 @@ graph TD
     Framework -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
     PPT -- "Generates Slides" --> Disk[(Local .pptx Files)]:::external
     PPT -- "Fetches Byte-Streams" --> AI_Image[(Free AI Image API)]:::external
-`
+```
 
 ---
 
 ## 📁 Project Structure
 
-`	ext
+```text
 ppt-agent/
 │
 ├── README.md                      # Architectural case study (you are here)
@@ -97,7 +97,7 @@ ppt-agent/
 │
 └── generated_presentations/       # Secure absolute-path output folder
     └── Team_Collaboration.pptx    # Ready-to-present output files
-`
+```
 
 ---
 
@@ -106,16 +106,16 @@ ppt-agent/
 **Prerequisites:** Python 3.9+ & Claude Desktop App.
 
 ### Step 1: Bootstrap the Environment
-Simply clone the repository and run my automated setup script. This creates a secure .venv and installs the minimal, native dependencies (python-pptx and mcp).
+Simply clone the repository and run my automated setup script. This creates a secure `.venv` and installs the minimal, native dependencies (`python-pptx` and `mcp`).
 
-`powershell
+```powershell
 python setup.py
-`
+```
 
 ### Step 2: Link to Claude Desktop
 Point your local Claude Desktop config to the newly created secure environment.
-*   **Config file location:** %APPDATA%\Claude\claude_desktop_config.json
-*   Add my two servers, pointing them specifically to ./.venv/Scripts/python.exe. (Reference my included claude_desktop_config.json for the exact schema).
+*   **Config file location:** `%APPDATA%\Claude\claude_desktop_config.json`
+*   Add my two servers, pointing them specifically to `./.venv/Scripts/python.exe`. (Reference my included `claude_desktop_config.json` for the exact schema).
 
 ### Step 3: Run It!
 Open Claude Desktop and prompt it! The agent will negotiate with my servers locally:
@@ -125,8 +125,8 @@ Open Claude Desktop and prompt it! The agent will negotiate with my servers loca
 
 ## 👨‍💻 Development & Code Quality
 
-*   **Error Handling:** Every single tool I wrote (dd_slide, search_topic, etc.) is wrapped in strict 	ry/except bounds. If a tool fails, it catches the error and returns a dynamic fallback string (e.g., gracefully hallucinating if the internet drops) rather than crashing the agent.
-*   **Documentation:** Every .py file contains comprehensive, first-person architectural docstrings outlining *why* I engineered it that way, alongside line-by-line intent documentation. 
+*   **Error Handling:** Every single tool I wrote (`add_slide`, `search_topic`, etc.) is wrapped in strict `try/except` bounds. If a tool fails, it catches the error and returns a dynamic fallback string (e.g., gracefully hallucinating if the internet drops) rather than crashing the agent.
+*   **Documentation:** Every `.py` file contains comprehensive, first-person architectural docstrings outlining *why* I engineered it that way, alongside line-by-line intent documentation. 
 
 **This ecosystem isn't just a script; it's a fully operational, decentralized AI microservice network.**
 
