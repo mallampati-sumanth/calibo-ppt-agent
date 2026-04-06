@@ -249,6 +249,9 @@
         const chat = document.getElementById("chat");
         const input = document.getElementById("promptStr");
         const btn = document.getElementById("genBtn");
+        // If served from FastAPI (recommended), same-origin calls avoid CORS and file:// issues.
+        // You can still override with: ?api=http://localhost:8001
+        const apiBase = new URLSearchParams(window.location.search).get("api") || "";
 
         input.addEventListener("input", function() {
             this.style.height = "auto";
@@ -316,7 +319,8 @@
             const loadingContent = addMessage(loadingHTML, false);
 
             try {
-                const response = await fetch("http://localhost:8000/api/generate", {
+                const apiUrl = apiBase ? `${apiBase}/api/generate` : "/api/generate";
+                const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ prompt })

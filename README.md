@@ -28,7 +28,7 @@ Instead, it executes a strict **MCP toolchain** ("The Eyes" + "The Hands") to gr
 
 ```text
                             ↓ [DoPPT Web UI]
-             (frontend/index.html — ChatGPT-style interface)
+      (served by FastAPI at /  — source is frontend/index.html)
                             ↓ [FastAPI Backend]
                   (backend/main.py — /api/generate)
                             ↓ [backend/agent_mcp.py]
@@ -57,6 +57,10 @@ Instead, it executes a strict **MCP toolchain** ("The Eyes" + "The Hands") to gr
 4. **📦 Two Run Modes:**
    - **DoPPT Web UI mode (current default):** `frontend/` + `backend/` + `mcp_servers/`.
    - **Standalone MCP demo mode:** legacy root scripts (`ppt_server.py`, `search_server.py`) are kept as a professor-friendly reference implementation.
+
+5. **🎨 Better PPT Styling by Default:** The PPT tool server applies consistent background + accent + typography so decks look "designed" even without a template.
+6. **🧩 Template Support (True Themes):** If you provide a `.pptx` template path, the agent can create the deck from it to inherit real PowerPoint themes.
+7. **🖼️ Image Support (Local Files):** If you provide a local image path, the agent can place it on a slide.
 
 ---
 
@@ -132,10 +136,34 @@ GROQ_API_KEY=your_key_here
 Terminal 1 (backend):
 
 ```powershell
+# Recommended on Windows if port 8000 is busy:
+$env:DOPPT_PORT=8001
 python backend/main.py
 ```
 
-Then open `frontend/index.html` in your browser.
+Then open the web UI:
+
+- http://localhost:8001/
+
+Important: do NOT open the HTML using `file://...` (double-click). Browsers block `fetch()` from `file://` to `http://localhost`.
+
+If you really want to open the HTML file directly, pass an API override:
+
+- `frontend/index.html?api=http://localhost:8001`
+
+---
+
+## 🎨 PPT Styling, Templates, and Images
+
+### Default Styling (No Template)
+The slide tools apply a light design system (background + accent bar + typography) automatically.
+
+### True Themes (Recommended)
+Create a PowerPoint template `.pptx` in Microsoft PowerPoint and pass its path.
+The agent can call `create_presentation_from_template(filename, template_path)` to inherit master slides, fonts, and colors.
+
+### Images
+If you provide a local image file path, the agent can place it using `add_image_slide_from_path(filename, title, image_path, caption)`.
 
 ---
 
