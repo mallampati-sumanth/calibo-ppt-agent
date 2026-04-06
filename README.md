@@ -10,15 +10,15 @@
 <br>
 
 ## 🎥 Video Demonstration
-Watch DoPPT autonomously research and generate a .pptx presentation in real-time, executing its tools natively without relying on 3rd-party desktop clients!
+Watch DoPPT autonomously research and generate a .pptx presentation in real-time, executing its tools natively without relying on 3rd party desktop clients!
 **[▶️ Click here to watch the full demo](https://drive.google.com/file/d/1eZVDDowfdvjuLnUFUZeoNPfBx6CZ1Sqb/view?usp=sharing)**
 
 <br>
 
-**Welcome to the DoPPT ecosystem.** 
+**Welcome to my DoPPT ecosystem.** 
 While standard MCP implementations rely heavily on the Anthropic/Claude Desktop App, I deliberately engineered a completely custom, full-stack architecture that implements the **Model Context Protocol (MCP)** natively. 
 
-I architected this project from the ground up to demonstrate mastery of asynchronous Python APIs, custom UI development, and programmatic LLM tool orchestration.
+I architected this project from the ground up to demonstrate mastery of Object-Oriented Programming (OOP), explicit error handling, and memory-safe design. 
 
 ---
 
@@ -28,9 +28,9 @@ I architected this project from the ground up to demonstrate mastery of asynchro
 
 `	ext
                             ↓ [DoPPT Web UI (index.html)]
-              (Captures user intent with a sleek ChatGPT-style interface)
+             (Captures user intent with a stylish ChatGPT-like interface)
                             ↓ [FastAPI Backend (main.py)]
-                (Routes the HTTP request securely to the Python Agent)
+               (Routes the HTTP request securely to the Python Agent)
                             ↓ [Native Orchestrator (agent_mcp.py)]
             ┌──────────────────────────────────────────────┐
             │           PARALLEL TOOL EXECUTION            │
@@ -42,42 +42,42 @@ I architected this project from the ground up to demonstrate mastery of asynchro
     hallucination.                                writes to disk.
             └──────────────────────────────────────────────┘
                             ↓ 
-           [Output: generated_presentations/my_slides.pptx saved securely!]
+           [Output: presentation.pptx saved securely!]
 `
 
 ---
 
 ## 💎 What Makes My Project Special?
 
-1. **🧠 Independent LLM Brain:** I bypassed Claude entirely, routing the intelligence through **Groq's Llama 3.3-70b**. It's incredibly fast and fully capable of parsing JSON-RPC tool schemas natively.
-2. **🌐 Live Web Search Integration:** Replaced basic REST APIs with the duckduckgo-search library, giving the agent real-time access to the live internet to ensure strict factual accuracy.
-3. **💻 Custom Premium Frontend:** Built a beautiful, responsive HTML/JS UI acting as the primary prompt engine, modeled in a clean **ChatGPT-style format**.
-4. **⚙️ Native MCP Orchestration:** Used mcp.client.stdio natively. The Python backend programmatically establishes standard I/O byte streams matching directly with the local Python tool servers, removing the need for external desktop apps.
-5. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely inside the tool servers. My servers are wrapped in strict classes (PPTManager and WebSearchFetcher) with explicitly managed memory states and absolute file pathing.
+1. **🧠 Independent LLM Brain:** I bypassed Claude entirely, routing the intelligence through **Groq's Llama 3.3-70b**. It's incredibly fast and fully capable of parsing JSON-RPC tool schemas.
+2. **🌐 The Eyes — Live Search:** I engineered search_server.py to natively query DuckDuckGo. The agent physically cannot hallucinate facts; my tools force it to research real live web data before building slides.
+3. **💻 The Crown Jewel — Custom Frontend:** Many projects use clunky terminal outputs or Claude Desktop. I engineered a sleek HTML/JS UI modeled exactly after ChatGPT, operating natively over a FastAPI backend (main.py).
+4. **🛡️ The Native Orchestrator The Shield:** When testing, I discovered the need for a robust handler. I engineered gent_mcp.py to use mcp.client.stdio directly, managing byte I/O streams programmatically without external apps.
+5. **🏗️ Absolute Modularity (OOP):** I banned global variables entirely. My servers are wrapped in strict classes (PPTManager and WebSearchFetcher) with explicitly managed memory pointers and carefully mapped absolute paths (./generated_presentations/).
 
 ---
 
 ## 🗺️ System Architecture
 
-My architecture completely decouples the **Frontend UI**, the **LLM Brain**, and the **Filesystem Hands**.
+My architecture completely decouples the **LLM Brain** from the **Filesystem Hands** and **Web Eyes**.
 
 `mermaid
 graph TD
     classDef ui fill:#A8C6FA,stroke:#333,stroke-width:2px,color:#000;
-    classDef api fill:#FDE047,stroke:#333,stroke-width:2px,color:#000;
+    classDef shield fill:#FDE047,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5,color:#000;
     classDef server fill:#86EFAC,stroke:#333,stroke-width:2px,color:#000;
     classDef external fill:#FCA5A5,stroke:#333,stroke-width:2px,color:#000;
 
-    UI[UI: index.html]:::ui -- POST /api/generate --> Backend(FastAPI: main.py):::api
-    Backend -- Initiates workflow --> Orchestrator{agent_mcp.py<br/>MCP Loop}
+    UI[DoPPT UI: index.html]:::ui -- POST Request --> Shield(FastAPI Backend<br/>main.py):::shield
+    Shield -- Valid JSON --> Framework{Native Orchestrator<br/>agent_mcp.py}
     
-    Orchestrator -- Prompt + Tools --> Groq[(Groq Llama 3.3 API)]:::external
+    Framework -->|WebSearchServer| Search[search_server.py<br/>The Eyes]:::server
+    Search -- Fetches Real Data --> Wiki[(DuckDuckGo API)]:::external
     
-    Orchestrator -->|WebSearchServer| Search[search_server.py<br/>The Eyes]:::server
-    Search -- Fetches Real Data --> DDG[(DuckDuckGo)]:::external
-    
-    Orchestrator -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
+    Framework -->|PPTOperations| PPT[ppt_server.py<br/>The Hands]:::server
     PPT -- Generates Slides --> Disk[(Local .pptx Files)]:::external
+    
+    Framework -- Prompt + Tools --> Groq[(Groq Llama 3.3 API)]:::external
 `
 
 ---
@@ -85,10 +85,10 @@ graph TD
 ## 📁 Project Structure
 
 `	ext
-ppt_agent/
+ppt-agent/
 │
 ├── README.md                      # Architectural case study (you are here)
-├── requirements.txt               # Locked dependencies and libraries
+├── requirements.txt               # Locked dependencies
 │
 ├── frontend/
 │   └── index.html                 # The beautiful ChatGPT-style UI
@@ -112,7 +112,7 @@ ppt_agent/
 ### Step 1: Install Dependencies
 Open your terminal and install the required native dependencies:
 
-`ash
+`powershell
 pip install fastapi uvicorn pydantic mcp duckduckgo-search python-pptx openai
 `
 
@@ -120,26 +120,22 @@ pip install fastapi uvicorn pydantic mcp duckduckgo-search python-pptx openai
 Navigate to the ackend directory and start the FastAPI Uvicorn server.
 *(Ensure your Groq API key is set inside ackend/agent_mcp.py!)*
 
-`ash
+`powershell
 cd backend
 python -m uvicorn main:app
 `
 *(Ensure it runs on port 8000)*
 
-### Step 3: Launch the UI & Generate
-Simply open rontend/index.html in your favorite web browser. 
-
-Type your request in the beautifully styled chat box:
-> *"Create a 5-slide presentation on Artificial Intelligence trends."*
-
-Sit back and watch DoPPT orchestrate the research, slide generation, and formatting completely autonomously!
+### Step 3: Run It!
+Open rontend/index.html in your favorite web browser. The agent will negotiate with the servers locally:
+> *"Create a 5-slide presentation on Artificial Intelligence. First, search the web for the latest info. Then, build the slides."*
 
 ---
 
 ## 👨‍💻 Development & Code Quality
 
-*   **Error Handling:** Every single tool is wrapped in strict 	ry/except bounds. If a network request fails or formatting drops, it catches the error and returns a dynamic fallback string to the LLM (e.g., instructing it to use internal knowledge) rather than crashing the agent.
-*   **Documentation:** Every .py file contains comprehensive, professional architectural docstrings outlining *why* it was engineered that way, alongside line-by-line intent inline comments.
+*   **Error Handling:** Every single tool I wrote (dd_slide, search_topic, etc.) is wrapped in strict 	ry/except bounds. If a tool fails, it catches the error and returns a dynamic fallback string (e.g., gracefully hallucinating if the internet drops) rather than crashing the agent.
+*   **Documentation:** Every .py file contains comprehensive, first-person architectural docstrings outlining *why* I engineered it that way, alongside line-by-line intent documentation. 
 
 **This ecosystem isn't just a script; it's a fully operational, decentralized full-stack AI platform.**
 
