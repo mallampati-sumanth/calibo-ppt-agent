@@ -139,10 +139,7 @@ Then open `frontend/index.html` in your browser.
 
 ---
 
-## 🧪 Notes (So GitHub Rendering Looks Correct)
 
-- This README uses fenced code blocks (```), Mermaid, and centered HTML badges.
-- If you edit the README on Windows PowerShell, do **not** wrap it in backtick-heavy strings; it can break GitHub rendering.
 
 <div align="center">
   <p><em>Architected and engineered for stable, tool-driven execution.</em></p>
