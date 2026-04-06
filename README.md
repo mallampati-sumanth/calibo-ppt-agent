@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <h1>🪄 Auto-PPT Agent</h1>
   <p><em>An Enterprise-Grade, Autonomous Model Context Protocol (MCP) Ecosystem</em></p>
   <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge" alt="Status" />
